@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <title>Express Tracker</title>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <!-- <div class="container">
-        <div class="header">
-            <img src="" alt="">
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          class="header"
+          src="./images/attachment_121783271 (1).jpeg"
+          alt=""
+        />
+      </div>
 
-    </div> -->
-    
-</body>
+      <h1>Expense Tracker</h1>
+
+      <div class="add-transaction">
+        <input type="text" id="description" placeholder="Description" />
+        <input type="number" id="amount" placeholder="Amount" />
+        <input type="date" id="transactionDate" />
+        <button id="addBtn">Add Transaction</button>
+      </div>
+
+      <div class="transaction-history">
+        <h2>Transaction History</h2>
+        <ul id="transactions"></ul>
+      </div>
+
+      <div class="totals">
+        <p class="balance">Balance: <span id="balance">0</span></p>
+        <p class="income">Income: <span id="income">0</span></p>
+        <p class="expenses">Expenses: <span id="expenses">0</span></p>
+      </div>
+
+      <div style="width: 100%; max-width: 400px; margin: 2rem auto">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+
+    <script src="script/script.js"></script>
+  </body>
 </html>
