@@ -13,17 +13,21 @@
         <img
           class="header"
           src="./images/attachment_121783271 (1).jpeg"
-          alt=""
+          alt="Header Image"
         />
       </div>
 
-      <h1>Expense Tracker</h1>1
+      <h1>Expense Tracker</h1>
 
       <div class="add-transaction">
         <input type="text" id="description" placeholder="Description" />
         <input type="number" id="amount" placeholder="Amount" />
         <input type="date" id="transactionDate" />
-        <button id="addBtn">Add Transaction</button>
+
+        <div class="type-buttons">
+          <button id="incomeBtn" class="type-btn income-btn">Add Income</button>
+          <button id="expenseBtn" class="type-btn expense-btn">Add Expense</button>
+        </div>
       </div>
 
       <div class="transaction-history">
