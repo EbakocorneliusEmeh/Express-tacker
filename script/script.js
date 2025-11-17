@@ -1,7 +1,9 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const descriptionInput = document.getElementById("description");
   const amountInput = document.getElementById("amount");
   const dateInput = document.getElementById("transactionDate");
+  dateInput.max = new Date().toISOString().split("T")[0];
   const incomeBtn = document.getElementById("incomeBtn");
   const expenseBtn = document.getElementById("expenseBtn");
   const transactionsList = document.getElementById("transactions");
@@ -10,8 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const expensesDisplay = document.getElementById("expenses");
   const pieChartCanvas = document.getElementById("pieChart");
 
+
   let transactions = loadTransactions();
   let pieChart;
+  
 
   updateUI();
 
