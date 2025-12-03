@@ -1,9 +1,7 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const descriptionInput = document.getElementById("description");
   const amountInput = document.getElementById("amount");
   const dateInput = document.getElementById("transactionDate");
-  dateInput.max = new Date().toISOString().split("T")[0];
   const incomeBtn = document.getElementById("incomeBtn");
   const expenseBtn = document.getElementById("expenseBtn");
   const transactionsList = document.getElementById("transactions");
@@ -11,28 +9,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const incomeDisplay = document.getElementById("income");
   const expensesDisplay = document.getElementById("expenses");
   const pieChartCanvas = document.getElementById("pieChart");
+  const errorMessage = document.getElementById("errorMessage");
 
+  dateInput.max = new Date().toISOString().split("T")[0];
 
   let transactions = loadTransactions();
   let pieChart;
-  
 
   updateUI();
 
   incomeBtn.addEventListener("click", () => addTransaction("income"));
   expenseBtn.addEventListener("click", () => addTransaction("expense"));
 
+  // Show error without using alert()
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = "block";
+
+    setTimeout(() => {
+      errorMessage.style.display = "none";
+    }, 3000);
+  }
+
+  // Custom delete confirmation (NO alert, NO confirm)
+  function showDeleteConfirm(id) {
+    const confirmBox = document.createElement("div");
+    confirmBox.className = "confirm-box";
+    confirmBox.innerHTML = `
+      <p>Are you sure you want to delete this transaction?</p>
+      <div class="confirm-buttons">
+        <button id="yesDelete" class="yes">Yes</button>
+        <button id="noDelete" class="no">No</button>
+      </div>
+    `;
+
+    document.body.appendChild(confirmBox);
+
+    document.getElementById("yesDelete").onclick = () => {
+      deleteTransaction(id);
+      confirmBox.remove();
+    };
+
+    document.getElementById("noDelete").onclick = () => {
+      confirmBox.remove();
+    };
+  }
+
   function addTransaction(type) {
     const description = descriptionInput.value.trim();
     const amount = parseFloat(amountInput.value);
     const transactionDate = dateInput.value;
 
+    // ERROR FIX – no alert, only error message
     if (description === "" || isNaN(amount) || transactionDate === "") {
-      alert("Please enter a valid description, amount, and date.");
+      showError("Please enter a description, amount, and date.");
       return;
     }
 
-    const signedAmount = type === "expense" ? -Math.abs(amount) : Math.abs(amount);
+    const signedAmount =
+      type === "expense" ? -Math.abs(amount) : Math.abs(amount);
 
     const transaction = {
       id: generateId(),
@@ -72,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "Delete";
       deleteBtn.className = "delete-btn";
-      deleteBtn.addEventListener("click", () => deleteTransaction(transaction.id));
+      deleteBtn.addEventListener("click", () => showDeleteConfirm(transaction.id));
 
       listItem.append(descriptionSpan, dateSpan, amountSpan, deleteBtn);
       transactionsList.appendChild(listItem);
@@ -87,6 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
     expensesDisplay.textContent = Math.abs(totalExpenses).toFixed(2);
 
     updatePieChart(totalIncome, Math.abs(totalExpenses));
+  }
+
+  function deleteTransaction(id) {
+    transactions = transactions.filter((t) => t.id !== id);
+    saveTransactions(transactions);
+    updateUI();
   }
 
   function updatePieChart(income, expenses) {
@@ -109,12 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pieChart) pieChart.destroy();
     pieChart = new Chart(pieChartCanvas, config);
-  }
-
-  function deleteTransaction(id) {
-    transactions = transactions.filter((t) => t.id !== id);
-    saveTransactions(transactions);
-    updateUI();
   }
 
   function saveTransactions(transactions) {
