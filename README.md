@@ -1,1 +1,121 @@
-This project is a fully functional Expense Tracker app built with HTML CSS and JavaScript it allows users to manage their personal finances by adding income and expense transactions  with a description amount and date The interface includes  buttons for adding income or expenses, and every transaction is displayed in a  list that shows the description, date, signed amount positive for income and negative for expenses and a delete button for removing user income all financial totals including the  balance, total income, and total expenses are calculated automatically and updated when ever the user adds or removes a transaction to ensure data  the application stores all transactions in the browser’s localStorage enabling users to refresh or reopen the page without losing their data. The app also integrates Chart.js to generate a responsive pie chart that  represents the ratio of income and expenses the layout is designed to be user friendly and responsive displaying properly on both mobile and desktop devices and includes color  values green for income and red for expenses to make financial information easy to identified   this project demonstrates JavaScript DOM manipulation, event handling, localStorage usage, dynamic UI updates, and basic data visualization in a clean and simple expense-tracking interface.
+### Personal Expense Tracker
+
+A simple and interactive Personal Expense Tracker built with HTML, CSS, and JavaScript
+This application allows users to manage their finances by adding income and expenses viewing transaction history deleting items and tracking their total balance
+All data is saved in the browser using Local Storage, so user transactions remain even after refreshing the page.
+
+### Features
+ Add Transactions
+
+Add both income (positive values) and expenses (negative values).
+
+Input fields include:
+
+Description
+
+Amount (positive or negative)
+
+(Optional) Date
+
+### Transaction History
+
+Displays a list of all transactions.
+
+Each transaction shows:
+
+Description
+
+Amount
+
+Date 
+
+A delete button 
+
+Color-coded:
+
+Green for income
+
+Red for expenses
+
+### Financial Summary
+
+The app automatically calculates and displays:
+
+Total Balance
+
+Total Income
+
+Total Expenses
+
+### Persistent Data (Local Storage)
+
+All transactions are stored using localStorage.
+
+Reloading the page does NOT remove data.
+
+Example:
+
+localStorage.setItem("transactions", JSON.stringify(transactions));
+const saved = JSON.parse(localStorage.getItem("transactions"));
+
+### Responsive Design
+
+Works smoothly on mobile, tablet, and desktop.
+
+Clean and modern UI.
+
+### Bonus Enhancements (Optional)
+
+Date added to each transaction
+
+Pie or bar chart (using Chart.js) to visualize spending
+
+Filters for:
+
+Income only
+
+Expenses only
+
+### File Structure
+expense-tracker
+├── index.html  
+├── style.css 
+└── script.js
+
+### Technologies Used
+
+HTML5
+
+CSS3
+
+JavaScript 
+
+Local Storage API
+
+ Chart.js
+
+### How to Run This Project
+
+Download or clone the project folder:
+
+git clone https://github.com/EbakocorneliusEmeh/Express-tacker.git
+
+then you cd Express-tracker
+
+you install dependecies "npm install"
+
+you run the app by clicking on live
+
+Open the folder.
+
+Run the app by opening index.html in any browser.
+
+### Future Improvements
+
+Add user authentication
+
+Export transactions to CSV
+
+Monthly summaries
+
+Dark mode UI
