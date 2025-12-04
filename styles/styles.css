@@ -55,7 +55,6 @@ button:hover {
   background-color: #218838;
 }
 
-/* Buttons for type selection */
 .type-buttons {
   display: flex;
   justify-content: space-between;
@@ -82,6 +81,10 @@ button:hover {
 
 .income-btn {
   background-color: #4caf50;
+}
+
+.expense {
+  color: red;
 }
 
 .expense-btn {
@@ -139,6 +142,7 @@ button:hover {
 ul {
   list-style: none;
   padding: 0;
+  display: flex;flex-direction: column-reverse;
 }
 
 li {
